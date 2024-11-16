@@ -6,37 +6,13 @@ import (
 )
 
 func main() {
-	//sitemapUrls := []models.SitemapUrl{
-	//	{
-	//		Location:   "https://www.example.com",
-	//		LastMod:    "2021-01-01",
-	//		ChangeFreq: "daily",
-	//		Priority:   "1.0",
-	//	},
-	//	{
-	//		Location:   "https://www.example.com/about",
-	//		LastMod:    "2021-01-01",
-	//		ChangeFreq: "daily",
-	//		Priority:   "0.8",
-	//	},
-	//	{
-	//		Location:   "https://www.example.com/contact",
-	//		LastMod:    "2021-01-01",
-	//		ChangeFreq: "daily",
-	//		Priority:   "0.8",
-	//	},
-	//}
-	//
-	//sitemap := models.NewSitemap(sitemapUrls)
-	//sitemap.Output()
+	url := "https://example.com/sitemap.xml"
 
-	url := "https://developers.google.com/sitemap.xml"
-
-	data, contentType, err := sitemap.Fetch(url)
+	sm, err := sitemap.GetSitemapFromUrl(url)
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println("Content-Type:", contentType)
-	fmt.Println(string(data))
+	_ = sm.OutputJSON("sitemap.json")
+	_ = sm.OutputCSV("sitemap.csv")
+	fmt.Println("Sitemap output to sitemap.json and sitemap.csv")
 }
